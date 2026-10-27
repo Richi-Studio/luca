@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="es-CO">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; connect-src 'self'; manifest-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_CO">
+<meta property="og:title" content="Luca · Tus cuentas claras">
+<meta property="og:description" content="Gastos, presupuestos y metas en pesos colombianos. Gratis, sin registro y funciona sin internet.">
+<meta property="og:url" content="https://richi-studio.github.io/luca/">
+<meta property="og:image" content="https://richi-studio.github.io/luca/icons/icon-512.png">
+<meta name="twitter:card" content="summary">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Luca · Tus cuentas claras</title>
+<meta name="description" content="Luca: lleva tus gastos, ingresos, presupuestos y metas en pesos colombianos. Funciona sin conexión y tus datos se quedan en tu equipo.">
+<meta name="theme-color" content="#27306B">
+<meta name="color-scheme" content="light dark">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Luca">
+<script>
+  // Aplica el tema guardado antes de pintar, para que no parpadee.
+  try {
+    var t = localStorage.getItem('luca-theme') || 'sistema';
+    var dark = t === 'oscuro' || (t === 'sistema' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+  } catch (e) { document.documentElement.dataset.theme = 'light'; }
+</script>
+  <script type="module" crossorigin src="./assets/index-DJL4HV4p.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-CCn12VKO.css">
+</head>
+<body>
+<div id="app"></div>
+<noscript>Luca necesita JavaScript activado para funcionar.</noscript>
+</body>
+</html>

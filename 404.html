@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="es-CO">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Luca</title>
+<meta name="robots" content="noindex">
+<style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#27306B;color:#fff;font:600 16px system-ui,sans-serif}a{color:#F4B23E}</style>
+<script>
+  // Las pantallas de Luca usan #/ (por ejemplo #/movimientos). Si alguien escribe /movimientos, lo llevamos a la pantalla correcta.
+  (function () {
+    var p = location.pathname;
+    var i = p.indexOf('/', 1);
+    var base = /github\.io$/.test(location.hostname) && i > 0 ? p.slice(0, i + 1) : '/';
+    var rest = p.slice(base.length).replace(/\/+$/, '').replace(/\.html$/, '');
+    location.replace(base + (rest && rest !== 'index' ? '#/' + rest : '') + location.search);
+  })();
+</script>
+</head>
+<body><a href="./">Abrir Luca</a></body>
+</html>
