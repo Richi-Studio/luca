@@ -1,11 +1,28 @@
 // Generado en cada build. Guarda la app para usarla sin conexión.
-const CACHE = 'luca-mw1o323n';
-const FILES = ["./","./index.html","./manifest.webmanifest","./icons/icon-192.png","./icons/icon-512.png","./icons/apple-touch-icon.png","./icons/icon.svg","./assets/inter-latin-700-normal-Yt3aPRUw.woff2","./assets/inter-latin-ext-700-normal-Ca8adRJv.woff2","./assets/inter-latin-600-normal-LgqL8muc.woff2","./assets/inter-latin-ext-600-normal-D2bJ5OIk.woff2","./assets/inter-latin-ext-800-normal-DZJjya6U.woff2","./assets/inter-latin-800-normal-BYj_oED-.woff2","./assets/inter-latin-400-normal-C38fXH4l.woff2","./assets/inter-latin-ext-400-normal-C1nco2VV.woff2","./assets/nunito-latin-ext-800-normal-CtU8tJOV.woff2","./assets/nunito-latin-800-normal-Dz8SOQK_.woff2","./assets/nunito-latin-ext-900-normal-Dllsvgjo.woff2","./assets/nunito-latin-900-normal-BVB1fGs6.woff2","./assets/index-_d0VX6qr.css","./assets/index-vTqBkSZL.js","./assets/cloud-CArExQok.js"];
+const CACHE = 'luca-mw4f0cx2';
+const FILES = ["./","./index.html","./manifest.webmanifest","./icons/icon-192.png","./icons/icon-512.png","./icons/apple-touch-icon.png","./icons/icon.svg","./assets/inter-latin-ext-400-normal-C1nco2VV.woff2","./assets/inter-latin-ext-800-normal-DZJjya6U.woff2","./assets/inter-latin-800-normal-BYj_oED-.woff2","./assets/inter-latin-400-normal-C38fXH4l.woff2","./assets/inter-latin-ext-700-normal-Ca8adRJv.woff2","./assets/inter-latin-700-normal-Yt3aPRUw.woff2","./assets/inter-latin-ext-600-normal-D2bJ5OIk.woff2","./assets/inter-latin-600-normal-LgqL8muc.woff2","./assets/nunito-latin-ext-800-normal-CtU8tJOV.woff2","./assets/nunito-latin-800-normal-Dz8SOQK_.woff2","./assets/nunito-latin-ext-900-normal-Dllsvgjo.woff2","./assets/nunito-latin-900-normal-BVB1fGs6.woff2","./assets/index-Bgd-XPyN.css","./assets/index-CAdNk523.js","./assets/cloud-DPWOKGE7.js","./assets/index.esm-BAn5-mTO.js"];
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(FILES)).then(() => self.skipWaiting()));
 });
 self.addEventListener('activate', (e) => {
   e.waitUntil(caches.keys().then((keys) => Promise.all(keys.filter((k) => k !== CACHE).map((k) => caches.delete(k)))).then(() => self.clients.claim()));
+});
+// Avisos push (Firebase Cloud Messaging manda los datos; aquí se muestran).
+self.addEventListener('push', (e) => {
+  let m = {};
+  try { m = e.data ? e.data.json() : {}; } catch (err) { m = {}; }
+  const d = m.data || (m.notification ? { title: m.notification.title, body: m.notification.body } : m);
+  if (!d || !d.title) return;
+  e.waitUntil(self.registration.showNotification(d.title, { body: d.body || '', icon: 'icons/icon-192.png', badge: 'icons/icon-192.png', tag: d.tag || undefined, data: { url: d.url || '#/' }, lang: 'es-CO' }));
+});
+self.addEventListener('notificationclick', (e) => {
+  e.notification.close();
+  const target = new URL((e.notification.data && e.notification.data.url) || '#/', self.registration.scope).href;
+  e.waitUntil(self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then((list) => {
+    const w = list.find((c) => c.url.startsWith(self.registration.scope));
+    if (w) { w.focus(); return w.navigate(target).catch(() => {}); }
+    return self.clients.openWindow(target);
+  }));
 });
 self.addEventListener('fetch', (e) => {
   const req = e.request;
