@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.studiobyrichi.luca",
+      "sha256_cert_fingerprints": [
+        "B7:89:F6:64:21:25:08:40:34:19:69:44:BE:79:8C:8A:08:92:B4:5C:7D:D2:98:72:19:75:D6:78:8F:93:0E:12"
+      ]
+    }
+  }
+]
